@@ -10,18 +10,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
-
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnMenuTabSelectedListener;
 
 /**
  * Created by user on 21/08/2016.
  */
 public class ActivityMain extends AppCompatActivity {
 
-//    private CoordinatorLayout coordinatorLayout;
+    private CoordinatorLayout coordinatorLayout;
     Button mStartButton;
 
     @Override

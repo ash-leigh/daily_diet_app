@@ -6,78 +6,76 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
-
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnMenuTabSelectedListener;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by user on 21/08/2016.
  */
 public class ActivityMealLog extends AppCompatActivity {
 
-//    private CoordinatorLayout coordinatorLayout;
-
     TextView mSQLTest;
     private SQLiteDatabase db;
     private Cursor cursor;
+    private Cursor countCursor;
+
+    TableLayout mMealLogTable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_log);
 
+        mMealLogTable = (TableLayout)findViewById(R.id.meal_log_table);
         openDatabase();
-        Log.d("DB Check", db.toString());
+        populateAllLogs();
 
-        mSQLTest = (TextView)findViewById(R.id.SQLTest);
-
-
-//        mSQLTest = (TextView)findViewById(R.id.SQLTest);
-//        mSQLTest.setText();
-
-//        BottomBar bottomBar = BottomBar.attach(this, savedInstanceState);
-//        bottomBar.setItemsFromMenu(R.menu.bottom_menu, new OnMenuTabSelectedListener() {
-//
-//            @Override
-//            public void onMenuItemSelected(int itemId) {
-//                switch (itemId) {
-//                    case R.id.home_item:
-//                        Log.d("TEST: ", "HOME");
-//                        Intent homeIntent = new Intent(ActivityMealLog.this, ActivityMain.class);
-//                        startActivity(homeIntent);
-//                        break;
-//                    case R.id.profile_item:
-//                        Log.d("TEST: ", "USER");
-//                        Intent profileIntent = new Intent(ActivityMealLog.this, ActivityUserProfile.class);
-//                        startActivity(profileIntent);
-//                        break;
-//                    case R.id.meal_log_item:
-//                        Log.d("TEST: ", "LOG");
-//                        Intent logIntent = new Intent(ActivityMealLog.this, ActivityMealLog.class);
-//                        startActivity(logIntent);
-//                        break;
-//                    case R.id.analysis_item:
-//                        Log.d("TEST: ", "ANALYSIS");
-//                        Intent analysisIntent = new Intent(ActivityMealLog.this, ActivityDietAnalysis.class);
-//                        startActivity(analysisIntent);
-//                        break;
-//                }
-//            }
-//        });
     }
 
     protected void openDatabase() {
         db = openOrCreateDatabase("FoodDB", Context.MODE_PRIVATE, null);
+    }
+
+    public void populateAllLogs(){
+        String COUNT_SQL = "SELECT COUNT(*) FROM foods;";
+        String SELECT_SQL = "SELECT * FROM foods;";
+
+        countCursor = db.rawQuery(COUNT_SQL, null);
+        countCursor.moveToFirst();
+        int count = countCursor.getInt(0);
+        countCursor.close();
+
+        cursor = db.rawQuery(SELECT_SQL, null);
+
+
+        for(int i=0; i < count; i++){
+            cursor.moveToPosition(i);
+            Log.d("Counter test", "TEST");
+
+            TableRow row = new TableRow(this);
+            TextView dateText = new TextView(this);
+            TextView mealText = new TextView(this);
+            TextView foodText = new TextView(this);
+
+            dateText.setText(cursor.getString(1));
+            row.addView(dateText);
+
+            mealText.setText(cursor.getString(2));
+            row.addView(mealText);
+
+            foodText.setText(cursor.getString(3));
+            row.addView(foodText);
+
+            mMealLogTable.addView(row);
+
+        }
     }
 
     public void showDatePickerDialog(View view) {

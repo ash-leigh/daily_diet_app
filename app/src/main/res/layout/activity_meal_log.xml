@@ -26,4 +26,9 @@
         android:text="DATE"
         android:onClick="showDatePickerDialog" />
 
+    <TableLayout
+        android:id="@+id/meal_log_table"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>

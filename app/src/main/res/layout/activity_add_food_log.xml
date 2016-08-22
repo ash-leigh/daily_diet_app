@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -20,28 +20,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/BreakfastSelection"
-        android:onClick="" />
+        android:onClick=""
+        android:background="@drawable/meal_selection_button"/>
 
     <Button
         android:id="@+id/selected_lunch_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/LunchSelection"
-        android:onClick="" />
+        android:onClick=""
+        android:background="@drawable/meal_selection_button"
+        android:layout_toRightOf="@+id/selected_breakfast_button" />
 
     <Button
         android:id="@+id/selected_dinner_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/DinnerSelection"
-        android:onClick="" />
+        android:onClick=""
+        android:background="@drawable/meal_selection_button"
+        android:layout_below="@+id/selected_breakfast_button" />
 
     <Button
         android:id="@+id/selected_snack_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/SnacksSelection"
-        android:onClick="" />
+        android:text="Snack"
+        android:onClick=""
+        android:background="@drawable/meal_selection_button"
+        android:layout_toRightOf="@+id/selected_dinner_button"
+        android:layout_below="@+id/selected_lunch_button"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -67,4 +75,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-</LinearLayout>
+</RelativeLayout>
+

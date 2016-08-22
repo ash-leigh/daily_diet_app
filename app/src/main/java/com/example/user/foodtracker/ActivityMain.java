@@ -1,0 +1,77 @@
+package com.example.user.foodtracker;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnMenuTabSelectedListener;
+
+/**
+ * Created by user on 21/08/2016.
+ */
+public class ActivityMain extends AppCompatActivity {
+
+//    private CoordinatorLayout coordinatorLayout;
+    Button mStartButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mStartButton = (Button) findViewById(R.id.startButton);
+
+        mStartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("FoodTracker ", "Start button clicked");
+            }
+        });
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.bottom_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.home_item:
+                Intent homeIntent = new Intent(ActivityMain.this, ActivityMain.class);
+                startActivity(homeIntent);
+                return true;
+            case R.id.profile_item:
+                Intent userIntent = new Intent(ActivityMain.this, ActivityUserProfile.class);
+                startActivity(userIntent);
+                return true;
+            case R.id.meal_log_item:
+                Intent logIntent = new Intent(ActivityMain.this, ActivityMealLog.class);
+                startActivity(logIntent);
+                return true;
+            case R.id.analysis_item:
+                Intent analysisIntent = new Intent(ActivityMain.this, ActivityDietAnalysis.class);
+                startActivity(analysisIntent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    }
+
+

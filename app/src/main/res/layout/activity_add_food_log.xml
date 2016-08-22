@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pick_date"
+        android:onClick="showDatePickerDialog" />
+
+    <TextView
+        android:id="@+id/selected_input_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:id="@+id/selected_breakfast_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/BreakfastSelection"
+        android:onClick="" />
+
+    <Button
+        android:id="@+id/selected_lunch_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/LunchSelection"
+        android:onClick="" />
+
+    <Button
+        android:id="@+id/selected_dinner_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/DinnerSelection"
+        android:onClick="" />
+
+    <Button
+        android:id="@+id/selected_snack_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/SnacksSelection"
+        android:onClick="" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="38dp"
+        android:layout_marginTop="50dp"
+        android:id="@+id/search_text"
+        android:hint="@string/SearchFood"/>
+
+    <Button
+        android:id="@+id/search_button"
+        android:text="@string/search"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/save"
+        android:text="@string/search"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FoodTracker</string>
+    <string name="pick_date">Select date</string>
+    <string name="BreakfastSelection">Breakfast</string>
+    <string name="LunchSelection">Lunch</string>
+    <string name="DinnerSelection">Dinner</string>
+    <string name="SnacksSelection">Snack</string>
+    <string name="SearchFood">Search Food</string>
+    <string name="search">Search</string>
+</resources>

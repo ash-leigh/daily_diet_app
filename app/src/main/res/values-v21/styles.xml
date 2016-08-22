@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <style name="AppTheme" parent="Theme.AppCompat.Light">
+                <!-- Customize your theme here. -->
+                <item name="colorPrimary">@color/lightGreen</item>
+                <item name="colorPrimaryDark">@color/darkGreen</item>
+                <item name="colorAccent">@color/mediumGreen</item>
+                <item name="android:colorBackground">@color/mediumGreen</item>
+                <item name="android:colorForeground">@color/cream</item>
+                <item name="android:navigationBarColor">@color/darkGreen</item>
+                <item name="android:statusBarColor">@color/darkGreen</item>
+                <item name="android:textColorPrimary">@color/darkGreen</item>
+                <item name="android:textColorPrimaryInverse">@color/darkGreen</item>
+                <item name="android:textColorSecondary">@color/darkGreen</item>
+                <item name="android:textColorSecondaryInverse">@color/darkGreen</item>
+                <item name="android:windowBackground">@color/mediumGreen</item>
+        </style>
+</resources>

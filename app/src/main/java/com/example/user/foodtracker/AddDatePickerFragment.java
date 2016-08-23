@@ -11,6 +11,7 @@ public class AddDatePickerFragment extends DatePickerFragment {
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
         String date = getDate(year, month, day);
+
         ActivityAddFoodLog originalActivity = (ActivityAddFoodLog) getActivity();
         originalActivity.assignDate(date);
     }
@@ -20,7 +21,7 @@ public class AddDatePickerFragment extends DatePickerFragment {
         Integer originalYear = year;
         Integer originalMonth = month;
         Integer originalDay = day;
-        String date = originalYear.toString() + originalMonth.toString() + originalDay.toString();
+        String date = originalYear.toString() + "-" + originalMonth.toString() + "-" + originalDay.toString();
 
         Log.d("date selected", date);
         return date;

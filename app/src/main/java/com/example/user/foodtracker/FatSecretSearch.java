@@ -16,11 +16,12 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * Created by user on 21/08/2016.
  */
+
 public class FatSecretSearch {
 
     final static private String APP_METHOD = "GET";
-    final static private String APP_KEY = "34322e8b05af485cba8ae5576c0cb0b7";
-    final static private String APP_SECRET = "f7b483a056c44ababc9914797e1b5837&";
+    final static private String APP_KEY = "8d64500e85f9483fb49e2a9676f5afb3";
+    final static private String APP_SECRET = "6a058997daeb4c3c8faed0582fc523e3&";
     final static private String APP_URL = "http://platform.fatsecret.com/rest/server.api";
     private static final String HMAC_SHA1_ALGORITHM = "HmacSHA1";
 
@@ -71,20 +72,21 @@ public class FatSecretSearch {
     }
 
     private static String join(String[] array, String separator) {
-        StringBuilder b = new StringBuilder();
+        StringBuilder string = new StringBuilder();
         for (int i = 0; i < array.length; i++) {
             if (i > 0)
-                b.append(separator);
-            b.append(array[i]);
+                string.append(separator);
+            string.append(array[i]);
         }
-        return b.toString();
+        return string.toString();
     }
 
     private static String nonce() {
-        Random r = new Random();
-        StringBuilder n = new StringBuilder();
-        for (int i = 0; i < r.nextInt(8) + 2; i++)
-            n.append(r.nextInt(26) + 'a');
-        return n.toString();
+        Random rand = new Random();
+        StringBuilder string = new StringBuilder();
+        for (int i = 0; i < rand.nextInt(8) + 2; i++)
+            string.append(rand.nextInt(26) + 'a');
+        Log.d("NONCE", string.toString());
+        return string.toString();
     }
 }

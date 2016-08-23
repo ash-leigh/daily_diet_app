@@ -1,5 +1,6 @@
 package com.example.user.foodtracker;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -14,25 +15,43 @@ import java.util.ArrayList;
  */
 public class SetUpFoodResults {
 
-    protected ArrayList<FoodItem> mSearchResults = new ArrayList<FoodItem>();
+    protected FoodItem mSearchResults;
+    protected boolean mApiFinished;
+    protected Activity mCaller;
 
-    public SetUpFoodResults(String query){
-        mSearchResults = new ArrayList<FoodItem>();
-        makeApiCall(query);
+    String mQuantity;
+    String mMeasure;
+    String mFood;
+
+    public SetUpFoodResults(String quantity, String measure, String food){
+        mQuantity = quantity;
+        mMeasure = measure;
+        mFood = food;
     }
 
-    public void makeApiCall(String query){
+
+    public void setCallingActivity(Activity callingActivity){
+        mCaller = callingActivity;
+    }
+
+    public void makeApiCall(){
+        String quantity = mQuantity;
+        String food = mFood;
+        String measure = mMeasure;
 
         AsyncHttpClient client = new AsyncHttpClient();
 
-        FatSecretSearch fatSecretSearch = new FatSecretSearch();
-        String API_URL = fatSecretSearch.searchFood(query);
-        Log.d("FatSecretUrl: ", API_URL);
+        EdamamSearch fatSecretSearch = new EdamamSearch();
+        String API_URL = fatSecretSearch.searchFood(quantity, measure, food);
 
         client.get(API_URL, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONObject jsonObject) {
                 generateResults(jsonObject);
+
+                ActivityAddFoodLog callingActivity = (ActivityAddFoodLog) mCaller;
+                callingActivity.insertIntoDB();
+
             }
 
             @Override
@@ -43,30 +62,37 @@ public class SetUpFoodResults {
     }
 
     private void generateResults(JSONObject apiResults){
+        JSONObject object = apiResults.optJSONObject("totalNutrients");
 
-        JSONObject object = apiResults.optJSONObject("foods");
+        JSONObject calObject = object.optJSONObject("ENERC_KCAL");
+        String foodCalories = calObject.optString("quantity");
 
-        JSONArray jsonResults = object.optJSONArray("food");
+        JSONObject satObject = object.optJSONObject("FASAT");
+        String foodSaturatedFat = satObject.optString("quantity");
+        foodSaturatedFat = foodSaturatedFat.substring(0,4);
 
-        if (jsonResults != null) {
-            for (int i = 0; i < jsonResults.length(); i++) {
+        JSONObject fatObject = object.optJSONObject("FAT");
+        String foodFat = fatObject.optString("quantity");
+        foodFat = foodFat.substring(0,4);
 
-                JSONObject jsonResult = jsonResults.optJSONObject(i);
+        JSONObject carbObject = object.optJSONObject("CHOCDF");
+        String foodCarbs = carbObject.optString("quantity");
+        foodCarbs = foodCarbs.substring(0,4);
 
-                String foodName = jsonResult.optString("food_name");
-                String foodDescription = jsonResult.optString("food_description");
-                String foodBrand = jsonResult.optString("brand_name");
-                String foodId = jsonResult.optString("food_id");
-                String foodType = jsonResult.optString("food_type");
-                String foodUrl = jsonResult.optString("food_url");
+        JSONObject sugObject = object.optJSONObject("SUGAR");
+        String foodSugar = sugObject.optString("quantity");
+        foodSugar = foodSugar.substring(0,4);
 
-                FoodItem foodItem = new FoodItem(foodName, foodDescription, foodBrand, foodId, foodType, foodUrl);
-                mSearchResults.add(foodItem);
-            }
-        }
+        JSONObject proObject = object.optJSONObject("PROCNT");
+        String foodProtien = proObject.optString("quantity");
+        foodProtien = foodProtien.substring(0,4);
+
+        FoodItem foodItem = new FoodItem(foodCalories, foodFat, foodSaturatedFat, foodCarbs, foodSugar, foodProtien);
+        mSearchResults = foodItem;
     }
 
-    public ArrayList<FoodItem> getSearchResults(){
+    public FoodItem getSearchResults(){
+        Log.d("TEST", "get being called");
         return mSearchResults;
     }
 }

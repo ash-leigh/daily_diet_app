@@ -4,37 +4,43 @@ package com.example.user.foodtracker;
  * Created by user on 21/08/2016.
  */
 public class FoodItem {
-    private String mFoodName;
-    private String mFoodDescription;
-    private String mFoodBrand;
-    private String mFoodId;
-    private String mFoodType;
-    private String mFoodUrl;
+    private String mFoodCalories;
+    private String mFoodFat;
+    private String mFoodSauratedFat;
+    private String mFoodCarbs;
+    private String mFoodSugar;
+    private String mFoodProtien;
 
-    public FoodItem(String foodName, String foodDescription, String foodBrand, String foodId, String foodType, String foodUrl) {
-        super();
-        mFoodName = foodName;
-        mFoodDescription = foodDescription;
-        mFoodBrand = foodBrand;
-        mFoodId = foodId;
-        mFoodType = foodType;
-        mFoodUrl = foodUrl;
+    public FoodItem(String foodCalories, String foodFat, String foodSaturatedFat, String foodCarbs, String foodSugar, String foodProtien) {
+        mFoodCalories = foodCalories;
+        mFoodFat = foodFat;
+        mFoodSauratedFat = foodSaturatedFat;
+        mFoodCarbs = foodCarbs;
+        mFoodSugar = foodSugar;
+        mFoodProtien = foodProtien;
     }
 
-    public String getID() {
-        return mFoodId;
+    public String getCalories() {
+        return mFoodCalories;
     }
 
-    public String getBrand() {
-        return mFoodBrand;
+    public String getFat() {
+        return mFoodFat;
     }
 
-    public String getTitle() {
-        return mFoodName;
+    public String getSatFat() {
+        return mFoodSauratedFat;
     }
 
-    public String getFoodDescription() {
-        return mFoodDescription;
-//        Per 101g - Calories: 197kcal | Fat: 7.79g | Carbs: 0.00g | Protein: 29.80g
+    public String getCarbs(){
+        return mFoodCarbs;
+    }
+
+    public String getSugar(){
+        return mFoodSugar;
+    }
+
+    public String getProtien(){
+        return mFoodProtien;
     }
 }

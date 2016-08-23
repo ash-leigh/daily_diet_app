@@ -20,7 +20,7 @@ public class LogDatePickerFragment extends DatePickerFragment {
         Integer originalYear = year;
         Integer originalMonth = month;
         Integer originalDay = day;
-        String date = originalYear.toString() + originalMonth.toString() + originalDay.toString();
+        String date = originalYear.toString() + "-" + originalMonth.toString() + "-" + originalDay.toString();
 
         Log.d("date selected", date);
         return date;

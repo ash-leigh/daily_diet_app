@@ -3,16 +3,27 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pick_date"
-        android:onClick="showDatePickerDialog" />
-
     <TextView
         android:id="@+id/selected_input_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/select_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pick_date"
+        android:onClick="showDatePickerDialog"
+        android:layout_below="@+id/selected_input_date"/>
+
+    <EditText
+        android:id="@+id/search_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="38dp"
+        android:layout_marginTop="50dp"
+        android:hint="@string/SearchFood"
+        android:layout_below="@+id/select_date"/>
 
 
     <Button
@@ -21,7 +32,8 @@
         android:layout_height="wrap_content"
         android:text="@string/BreakfastSelection"
         android:onClick=""
-        android:background="@drawable/meal_selection_button"/>
+        android:background="@drawable/meal_selection_button"
+        android:layout_below="@+id/search_text"/>
 
     <Button
         android:id="@+id/selected_lunch_button"
@@ -30,7 +42,8 @@
         android:text="@string/LunchSelection"
         android:onClick=""
         android:background="@drawable/meal_selection_button"
-        android:layout_toRightOf="@+id/selected_breakfast_button" />
+        android:layout_toRightOf="@+id/selected_breakfast_button"
+        android:layout_below="@+id/search_text"/>
 
     <Button
         android:id="@+id/selected_dinner_button"
@@ -51,29 +64,27 @@
         android:layout_toRightOf="@+id/selected_dinner_button"
         android:layout_below="@+id/selected_lunch_button"/>
 
-    <EditText
+
+
+    <Button
+        android:id="@+id/save_button"
+        android:text="@string/search"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="38dp"
-        android:layout_marginTop="50dp"
-        android:id="@+id/search_text"
-        android:hint="@string/SearchFood"/>
+        android:layout_below="@+id/selected_dinner_button"/>
 
-    <Button
-        android:id="@+id/search_button"
-        android:text="@string/search"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <!--<Button-->
+        <!--android:id="@+id/save"-->
+        <!--android:text="SAVE"-->
+        <!--android:layout_marginTop="25dp"-->
+        <!--android:layout_marginLeft="25dp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/search_text"/>-->
 
-    <Button
-        android:id="@+id/save"
-        android:text="@string/search"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+
 
 </RelativeLayout>
 

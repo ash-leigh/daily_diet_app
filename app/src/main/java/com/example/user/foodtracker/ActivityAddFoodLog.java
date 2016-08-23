@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,13 +27,14 @@ import java.util.ArrayList;
  */
 public class ActivityAddFoodLog extends AppCompatActivity{
 
-//    SetUpFoodResults mResults;
+    SetUpFoodResults mResults;
+    FoodItem foodItem;
 
-    Button mSearchButton;
     Button mSaveButton;
+
     String mSelectedDate;
     String mSelectedMeal;
-    String mSelectedFood;
+
 
     private SQLiteDatabase db;
 
@@ -44,44 +47,53 @@ public class ActivityAddFoodLog extends AppCompatActivity{
 
         assignMeal();
 
-        mSearchButton = (Button)findViewById(R.id.search_button);
-        mSaveButton = (Button)findViewById(R.id.save);
+        mSaveButton = (Button)findViewById(R.id.save_button);
+
 //
-//        String query = "chicken";
-//        mResults = new SetUpFoodResults(query);
-//
-        mSearchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                assignFood();
-//                ArrayList<FoodItem> test = mResults.getSearchResults();
-//                Log.d("searchResults: ", test.toString());
-            }
-        });
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                insertIntoDB();
+                assignFood();
             }
         });
+
+//        mSaveButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                insertIntoDB();
+//            }
+//        });
     }
 
 
 
     protected void createDatabase(){
-        db=openOrCreateDatabase("FoodDB", Context.MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS foods(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, date VARCHAR, meal VARCHAR, food VARCHAR);");
+        db=openOrCreateDatabase("FoodTracker", Context.MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS foodTracker(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, date VARCHAR, meal VARCHAR, food VARCHAR, foodCal VARCHAR, foodFat VARCHAR, foodSatFat VARCHAR, foodCarbs VARCHAR, foodSugar VARCHAR, foodProtien VARCHAR);");
     }
 
     protected void insertIntoDB(){
+
         String date = mSelectedDate;
         String meal = mSelectedMeal;
-        String food = mSelectedFood;
+
+        EditText foodTextBox = (EditText)findViewById(R.id.search_text);
+        String food = foodTextBox.getText().toString();
+
+        FoodItem foodItem = mResults.getSearchResults();
+        String foodCal = foodItem.getCalories();
+        String foodFat = foodItem.getFat();
+        String foodSatFat = foodItem.getSatFat();
+        String foodCarb = foodItem.getCarbs();
+        String foodSugar = foodItem.getSugar();
+        String foodPro = foodItem.getProtien();
+
+
 //        if(name.equals("") || add.equals("")){
 //            Toast.makeText(getApplicationContext(),"Please fill all fields", Toast.LENGTH_LONG).show();
 //            return;
 //        }
-        String query = "INSERT INTO foods (date,meal,food) VALUES('"+date+"', '"+meal+"','"+food+"');";
+        String query = "INSERT INTO foodTracker (date,meal,food,foodCal,foodFat,foodSatFat,foodCarbs,foodSugar,foodProtien) VALUES('"+date+"', '"+meal+"','"+food+"', '"+foodCal+"', '"+foodFat+"', '"+foodSatFat+"', '"+foodCarb+"', '"+foodSugar+"', '"+foodPro+"');";
         db.execSQL(query);
         Toast.makeText(getApplicationContext(),"Saved Successfully", Toast.LENGTH_LONG).show();
     }
@@ -130,10 +142,23 @@ public class ActivityAddFoodLog extends AppCompatActivity{
     }
 
     public void assignFood(){
+        Log.d("API func", "STARTED");
         EditText foodSearch = (EditText)findViewById(R.id.search_text);
+
         String foodText = foodSearch.getText().toString();
-        mSelectedFood = foodText;
+
+        String query = foodText;
+        String quantityTest = "1";
+        String measureTest = "large";
+        mResults = new SetUpFoodResults(quantityTest, measureTest, query);
+        mResults.setCallingActivity(ActivityAddFoodLog.this);
+        mResults.makeApiCall();
     }
+
+//    public void showFood(){
+//        FoodItem test = mResults.getSearchResults();
+//        Log.d("searchResults: ", test.getCarbs());
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

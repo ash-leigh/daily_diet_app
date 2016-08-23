@@ -1,6 +1,8 @@
 package com.example.user.foodtracker;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -16,8 +18,9 @@ import android.widget.Button;
  */
 public class ActivityMain extends AppCompatActivity {
 
-    private CoordinatorLayout coordinatorLayout;
     Button mStartButton;
+
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,18 @@ public class ActivityMain extends AppCompatActivity {
             }
         });
 
+        openDatabase();
+        cleardb();
+
+    }
+
+    protected void openDatabase() {
+        db = openOrCreateDatabase("FoodTracker", Context.MODE_PRIVATE, null);
+    }
+
+    public void cleardb(){
+        String DELETE_SQL = "TRUNCATE FROM foodTracker";
+        db.rawQuery(DELETE_SQL, null);
     }
 
     @Override

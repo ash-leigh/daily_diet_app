@@ -34,18 +34,19 @@ public class ActivityMealLog extends AppCompatActivity {
         setContentView(R.layout.activity_meal_log);
 
         mMealLogTable = (TableLayout)findViewById(R.id.meal_log_table);
+
         openDatabase();
         populateAllLogs();
 
     }
 
     protected void openDatabase() {
-        db = openOrCreateDatabase("FoodDB", Context.MODE_PRIVATE, null);
+        db = openOrCreateDatabase("FoodTracker", Context.MODE_PRIVATE, null);
     }
 
     public void populateAllLogs(){
-        String COUNT_SQL = "SELECT COUNT(*) FROM foods;";
-        String SELECT_SQL = "SELECT * FROM foods;";
+        String COUNT_SQL = "SELECT COUNT(*) FROM foodTracker;";
+        String SELECT_SQL = "SELECT * FROM foodTracker ORDER BY date;";
 
         countCursor = db.rawQuery(COUNT_SQL, null);
         countCursor.moveToFirst();
@@ -59,22 +60,106 @@ public class ActivityMealLog extends AppCompatActivity {
             cursor.moveToPosition(i);
             Log.d("Counter test", "TEST");
 
-            TableRow row = new TableRow(this);
-            TextView dateText = new TextView(this);
+            TableRow headerRow = new TableRow(this);
             TextView mealText = new TextView(this);
-            TextView foodText = new TextView(this);
-
-            dateText.setText(cursor.getString(1));
-            row.addView(dateText);
 
             mealText.setText(cursor.getString(2));
-            row.addView(mealText);
+            headerRow.addView(mealText);
 
+            TextView dateText = new TextView(this);
+            String dateRaw = cursor.getString(1);
+//            String[] pieces = dateRaw.split("-");
+//
+//            String day = pieces[2];
+//            String month = pieces[1];
+//            String year = pieces[0];
+//
+//            String dateFormatted = day + "/" + month + "/" + year;
+//
+            dateText.setText(dateRaw);
+            headerRow.addView(dateText);
+
+
+            mMealLogTable.addView(headerRow);
+
+            TableRow foodRow = new TableRow(this);
+            TextView foodText = new TextView(this);
             foodText.setText(cursor.getString(3));
-            row.addView(foodText);
+            foodRow.addView(foodText);
 
-            mMealLogTable.addView(row);
+            mMealLogTable.addView(foodRow);
 
+            TableRow calFatHeaderRow = new TableRow(this);
+            TextView calHeader = new TextView(this);
+            calHeader.setText("Calories");
+            calFatHeaderRow.addView(calHeader);
+
+            TextView fatHeader = new TextView(this);
+            fatHeader.setText("Fat");
+            calFatHeaderRow.addView(fatHeader);
+
+            mMealLogTable.addView(calFatHeaderRow);
+
+            TableRow calFatRow = new TableRow(this);
+            TextView foodCal = new TextView(this);
+            foodCal.setText(cursor.getString(4));
+            calFatRow.addView(foodCal);
+
+            TextView foodFat = new TextView(this);
+            foodFat.setText(cursor.getString(5));
+            calFatRow.addView(foodFat);
+
+            mMealLogTable.addView(calFatRow);
+
+            TableRow satCarbHeaderRow = new TableRow(this);
+            TextView satHeader = new TextView(this);
+            satHeader.setText("Saturated Fat");
+            satCarbHeaderRow.addView(satHeader);
+
+            TextView carbHeader = new TextView(this);
+            carbHeader.setText("Carbohydrates");
+            satCarbHeaderRow.addView(carbHeader);
+
+            mMealLogTable.addView(satCarbHeaderRow);
+
+            TableRow satCarbRow = new TableRow(this);
+
+            TextView foodSatFat = new TextView(this);
+            foodSatFat.setText(cursor.getString(6));
+            satCarbRow.addView(foodSatFat);
+
+            TextView foodCarbs = new TextView(this);
+            foodCarbs.setText(cursor.getString(7));
+            satCarbRow.addView(foodCarbs);
+
+            mMealLogTable.addView(satCarbRow);
+
+            TableRow sugProHeaderRow = new TableRow(this);
+            TextView sugHeader = new TextView(this);
+            sugHeader.setText("Sugar");
+            sugProHeaderRow.addView(sugHeader);
+
+            TextView proHeader = new TextView(this);
+            proHeader.setText("Protein");
+            sugProHeaderRow.addView(proHeader);
+
+            mMealLogTable.addView(sugProHeaderRow);
+
+            TableRow sugProRow = new TableRow(this);
+            TextView foodSugar = new TextView(this);
+            foodSugar.setText(cursor.getString(8));
+            sugProRow.addView(foodSugar);
+
+            TextView foodProtien = new TextView(this);
+            foodProtien.setText(cursor.getString(9));
+            sugProRow.addView(foodProtien);
+
+            mMealLogTable.addView(sugProRow);
+
+            TableRow spaceRow = new TableRow(this);
+            TextView spaceCol = new TextView(this);
+            spaceRow.addView(spaceCol);
+            mMealLogTable.addView(spaceRow);
         }
     }
 
@@ -85,7 +170,7 @@ public class ActivityMealLog extends AppCompatActivity {
 
     public void dbQuery(String query){
         Log.d("DB call", "yep");
-        String SELECT_SQL = "SELECT * FROM foods WHERE date = " + query;
+        String SELECT_SQL = "SELECT * FROM foodTracker WHERE date = " + query;
 
         cursor = db.rawQuery(SELECT_SQL, null);
         Log.d("DB Check", cursor.toString());

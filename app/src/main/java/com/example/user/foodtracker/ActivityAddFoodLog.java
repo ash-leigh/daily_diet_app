@@ -35,7 +35,6 @@ public class ActivityAddFoodLog extends AppCompatActivity{
     String mSelectedDate;
     String mSelectedMeal;
 
-
     private SQLiteDatabase db;
 
     @Override
@@ -77,6 +76,7 @@ public class ActivityAddFoodLog extends AppCompatActivity{
 
         EditText foodTextBox = (EditText)findViewById(R.id.search_text);
         String food = foodTextBox.getText().toString();
+
 
         FoodItem foodItem = mResults.getSearchResults();
         String foodCal = foodItem.getCalories();
@@ -142,12 +142,16 @@ public class ActivityAddFoodLog extends AppCompatActivity{
     public void assignFood(){
         Log.d("API func", "STARTED");
         EditText foodSearch = (EditText)findViewById(R.id.search_text);
+        EditText quantitySearch = (EditText)findViewById(R.id.quantity_text);
+        EditText measureSearch = (EditText)findViewById(R.id.measure_text);
 
         String foodText = foodSearch.getText().toString();
+        String quantityText = quantitySearch.getText().toString();
+        String measureText = measureSearch.getText().toString();
 
         String query = foodText;
-        String quantityTest = "1";
-        String measureTest = "large";
+        String quantityTest = quantityText;
+        String measureTest = measureText;
         mResults = new SetUpFoodResults(quantityTest, measureTest, query);
         mResults.setCallingActivity(ActivityAddFoodLog.this);
         mResults.makeApiCall();

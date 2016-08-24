@@ -13,8 +13,11 @@ public class NutrientCounter {
         mTotal += Float.parseFloat(count);
     }
 
-    public String getTotal(){
-        String result = Float.toString(mTotal);
-        return result;
+    public Float getTotal(){
+        return mTotal;
+    }
+
+    public Float getRemainingRI(int nutritionRecommendation){
+        return nutritionRecommendation - mTotal;
     }
 }

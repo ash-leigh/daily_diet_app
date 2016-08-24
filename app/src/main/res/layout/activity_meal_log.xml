@@ -10,19 +10,23 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MEAL LOG"/>
+        android:text="All meal logs"
+        android:textSize="20dp"
+        android:textColor="@color/darkGreen"
+        android:layout_gravity="center"/>
 
-    <TextView
-        android:id="@+id/SQLTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""/>
+    <!--<TextView-->
+        <!--android:id="@+id/SQLTest"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text=""/>-->
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ADD NEW"
-        android:onClick="addNewLog" />
+        android:text="add new log"
+        android:onClick="addNewLog"
+        android:layout_gravity="center"/>
 
     <!--<Button-->
         <!--android:layout_width="wrap_content"-->
@@ -32,10 +36,11 @@
 
     <TableLayout
         android:id="@+id/meal_log_table"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/grey"
-        android:padding="50dp" />
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:stretchColumns="*"
+        />
 
 </LinearLayout>
 </ScrollView>

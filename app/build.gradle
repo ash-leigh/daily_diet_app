@@ -26,6 +26,8 @@ dependencies {
     compile 'com.loopj.android:android-async-http:1.4.4'
     androidTestCompile 'junit:junit:4.12'
 
+    compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
+
     compile 'com.android.support:design:24.0.0'
     compile 'com.roughike:bottom-bar:1.2.1'
 

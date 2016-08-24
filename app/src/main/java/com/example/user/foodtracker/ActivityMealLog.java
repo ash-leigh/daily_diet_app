@@ -40,13 +40,14 @@ public class ActivityMealLog extends AppCompatActivity {
 
     }
 
+
     protected void openDatabase() {
-        db = openOrCreateDatabase("FoodTracker", Context.MODE_PRIVATE, null);
+        db = openOrCreateDatabase("FOOD_DB", Context.MODE_PRIVATE, null);
     }
 
     public void populateAllLogs(){
-        String COUNT_SQL = "SELECT COUNT(*) FROM foodTracker;";
-        String SELECT_SQL = "SELECT * FROM foodTracker ORDER BY date;";
+        String COUNT_SQL = "SELECT COUNT(*) FROM FOOD_TRACKER;";
+        String SELECT_SQL = "SELECT * FROM FOOD_TRACKER ORDER BY date;";
 
         countCursor = db.rawQuery(COUNT_SQL, null);
         countCursor.moveToFirst();
@@ -58,7 +59,6 @@ public class ActivityMealLog extends AppCompatActivity {
 
         for(int i=0; i < count; i++){
             cursor.moveToPosition(i);
-            Log.d("Counter test", "TEST");
 
             TableRow headerRow = new TableRow(this);
             TextView mealText = new TextView(this);
@@ -68,15 +68,15 @@ public class ActivityMealLog extends AppCompatActivity {
 
             TextView dateText = new TextView(this);
             String dateRaw = cursor.getString(1);
-//            String[] pieces = dateRaw.split("-");
-//
-//            String day = pieces[2];
-//            String month = pieces[1];
-//            String year = pieces[0];
-//
-//            String dateFormatted = day + "/" + month + "/" + year;
-//
-            dateText.setText(dateRaw);
+            String[] pieces = dateRaw.split("-");
+
+            String day = pieces[2];
+            String month = pieces[1];
+            String year = pieces[0];
+
+            String dateFormatted = day + "/" + month + "/" + year;
+
+            dateText.setText(dateFormatted);
             headerRow.addView(dateText);
 
 
@@ -170,7 +170,7 @@ public class ActivityMealLog extends AppCompatActivity {
 
     public void dbQuery(String query){
         Log.d("DB call", "yep");
-        String SELECT_SQL = "SELECT * FROM foodTracker WHERE date = " + query;
+        String SELECT_SQL = "SELECT * FROM FOOD_TRACKER WHERE date = " + query;
 
         cursor = db.rawQuery(SELECT_SQL, null);
         Log.d("DB Check", cursor.toString());

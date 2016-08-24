@@ -36,19 +36,8 @@ public class ActivityMain extends AppCompatActivity {
             }
         });
 
-        openDatabase();
-        cleardb();
-
     }
 
-    protected void openDatabase() {
-        db = openOrCreateDatabase("FoodTracker", Context.MODE_PRIVATE, null);
-    }
-
-    public void cleardb(){
-        String DELETE_SQL = "TRUNCATE FROM foodTracker";
-        db.rawQuery(DELETE_SQL, null);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

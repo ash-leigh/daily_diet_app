@@ -65,11 +65,9 @@ public class ActivityAddFoodLog extends AppCompatActivity{
 //        });
     }
 
-
-
     protected void createDatabase(){
-        db=openOrCreateDatabase("FoodTracker", Context.MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS foodTracker(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, date VARCHAR, meal VARCHAR, food VARCHAR, foodCal VARCHAR, foodFat VARCHAR, foodSatFat VARCHAR, foodCarbs VARCHAR, foodSugar VARCHAR, foodProtien VARCHAR);");
+        db=openOrCreateDatabase("FOOD_DB", Context.MODE_PRIVATE, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS FOOD_TRACKER(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, date VARCHAR, meal VARCHAR, food VARCHAR, foodCal VARCHAR, foodFat VARCHAR, foodSatFat VARCHAR, foodCarbs VARCHAR, foodSugar VARCHAR, foodProtien VARCHAR);");
     }
 
     protected void insertIntoDB(){
@@ -93,7 +91,7 @@ public class ActivityAddFoodLog extends AppCompatActivity{
 //            Toast.makeText(getApplicationContext(),"Please fill all fields", Toast.LENGTH_LONG).show();
 //            return;
 //        }
-        String query = "INSERT INTO foodTracker (date,meal,food,foodCal,foodFat,foodSatFat,foodCarbs,foodSugar,foodProtien) VALUES('"+date+"', '"+meal+"','"+food+"', '"+foodCal+"', '"+foodFat+"', '"+foodSatFat+"', '"+foodCarb+"', '"+foodSugar+"', '"+foodPro+"');";
+        String query = "INSERT INTO FOOD_TRACKER (date,meal,food,foodCal,foodFat,foodSatFat,foodCarbs,foodSugar,foodProtien) VALUES('"+date+"', '"+meal+"','"+food+"', '"+foodCal+"', '"+foodFat+"', '"+foodSatFat+"', '"+foodCarb+"', '"+foodSugar+"', '"+foodPro+"');";
         db.execSQL(query);
         Toast.makeText(getApplicationContext(),"Saved Successfully", Toast.LENGTH_LONG).show();
     }

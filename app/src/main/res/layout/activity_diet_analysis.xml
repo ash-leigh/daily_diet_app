@@ -8,4 +8,11 @@
         android:layout_height="wrap_content"
         android:text="DIET ANALYSIS"/>
 
+    <Button
+        android:id="@+id/select_date_to_analyse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DATE"
+        android:onClick="showDatePickerDialog" />
+
 </LinearLayout>
